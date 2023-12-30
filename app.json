@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "name": "MarsRoverPhotos",
+    "slug": "MarsRoverPhotos",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
