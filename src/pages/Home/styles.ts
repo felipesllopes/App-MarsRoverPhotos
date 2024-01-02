@@ -20,14 +20,14 @@ export const Title = styled.Text`
 
 export const ViewButton = styled.View`
     margin-top: 50%;
-    width: 50%;
+    width: 60%;
     align-items: center;
 `;
 
 export const Button = styled.TouchableOpacity`
     border-radius: 6px;
     background-color: rgba(80, 80, 80, 0.7);
-    width: 80%;
+    width: 100%;
     margin: 10px;
     border-width: 1px;
 `;

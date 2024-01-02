@@ -5,3 +5,19 @@ export interface IScreenNavigation {
 export interface IScreenNavigationProps {
     navigate: (screen: string, params: string) => void;
 }
+
+export interface IRoverData {
+    landing_date: string;
+    launch_date: string;
+    max_date: string;
+    max_sol: number;
+    name: string;
+    status: string;
+    total_photos: number;
+}
+
+export interface IImageData {
+    img_src: string;
+    earth_date: string;
+    sol: number;
+}
