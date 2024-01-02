@@ -3,13 +3,9 @@ import styled from "styled-components/native";
 import React from "react";
 import { Modal } from "react-native";
 
-interface IProps {
-    loading: boolean;
-}
-
-export const ModalLoading: React.FunctionComponent<IProps> = ({ loading }) => {
+export const ModalLoading: React.FunctionComponent = () => {
     return (
-        <Modal transparent={true} animationType="fade" visible={loading}>
+        <Modal transparent={true} animationType="fade" visible={true}>
             <BackScreen>
                 <Loading size={"large"} />
             </BackScreen>

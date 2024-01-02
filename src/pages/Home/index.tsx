@@ -1,4 +1,7 @@
+import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
+import { LoadingScreen } from "../../components/LoadingScreen";
+import { IScreenNavigation } from "../../interface";
 import {
     Button,
     Container,
@@ -7,9 +10,6 @@ import {
     ViewButton,
     Wallpaper,
 } from "./styles";
-import { useNavigation } from "@react-navigation/native";
-import { IScreenNavigation } from "../../interface";
-import { ModalLoading } from "../../components/ModalLoading";
 
 export const Home: React.FunctionComponent = () => {
     const { navigate } = useNavigation<IScreenNavigation>();
@@ -43,7 +43,7 @@ export const Home: React.FunctionComponent = () => {
                     </Button>
                 </ViewButton>
             </Wallpaper>
-            {loading && <ModalLoading loading={loading} />}
+            {loading && <LoadingScreen />}
         </Container>
     );
 };

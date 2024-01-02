@@ -1,8 +1,11 @@
+import Ionicons from "@expo/vector-icons/Ionicons";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { Picker } from "@react-native-picker/picker";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import React, { useEffect, useLayoutEffect, useState } from "react";
+import { LoadingScreen } from "../../components/LoadingScreen";
 import { ModalLoading } from "../../components/ModalLoading";
+import { PhotoList } from "../../components/PhotoList";
 import { IImageData, IRoverData } from "../../interface";
 import { api, key } from "../../services/api";
 import {
@@ -22,7 +25,6 @@ import {
     ViewPicker,
     Wallpaper,
 } from "./styles";
-import { PhotoList } from "../../components/PhotoList";
 
 export const ImageRover: React.FunctionComponent = () => {
     const route = useRoute();
@@ -35,6 +37,7 @@ export const ImageRover: React.FunctionComponent = () => {
     const [camList, setCamList] = useState([]);
     const [cam, setCam] = useState("");
     const [loading, setLoading] = useState(false);
+    const [loadingIcons, setLoadingIcons] = useState(true);
     /**
      * Contagem dos milissegundos. 21h (-3 do fuso horário) * 60m * 60s * 1000mn
      */
@@ -45,6 +48,14 @@ export const ImageRover: React.FunctionComponent = () => {
             title: name,
         });
     }, [navigation, name]);
+
+    useEffect(() => {
+        (async () => {
+            await Ionicons.loadFont().then(() => {
+                setLoadingIcons(false);
+            });
+        })();
+    }, []);
 
     useEffect(() => {
         (async () => {
@@ -206,7 +217,8 @@ export const ImageRover: React.FunctionComponent = () => {
                         numColumns={3}
                     />
 
-                    {loading && <ModalLoading loading={loading} />}
+                    {loading && <ModalLoading />}
+                    {loadingIcons && <LoadingScreen />}
                 </Screen>
             </Wallpaper>
         </Container>

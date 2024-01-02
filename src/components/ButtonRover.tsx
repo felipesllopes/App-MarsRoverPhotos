@@ -7,13 +7,19 @@ import { IScreenNavigationProps } from "../interface";
 interface IProps {
     nameRover: string;
     source: ImageSourcePropType;
+    setLoadingImage: (value: React.SetStateAction<boolean>) => void;
 }
 
 export const ButtonRover: React.FunctionComponent<IProps> = ({
     nameRover,
     source,
+    setLoadingImage,
 }) => {
     const { navigate } = useNavigation<IScreenNavigationProps>();
+
+    const loadImage = () => {
+        setLoadingImage(false);
+    };
 
     return (
         <Button
@@ -21,7 +27,11 @@ export const ButtonRover: React.FunctionComponent<IProps> = ({
             onPress={() => navigate("ImageRover", nameRover)}
         >
             <RoverName>{nameRover}</RoverName>
-            <ImageRover source={source} resizeMode="contain" />
+            <ImageRover
+                source={source}
+                resizeMode="contain"
+                onLoad={loadImage}
+            />
         </Button>
     );
 };
