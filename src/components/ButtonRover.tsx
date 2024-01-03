@@ -2,7 +2,6 @@ import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { ImageSourcePropType } from "react-native";
 import styled from "styled-components/native";
-import { IScreenNavigationProps } from "../interface";
 
 interface IProps {
     nameRover: string;
@@ -10,22 +9,33 @@ interface IProps {
     setLoadingImage: (value: React.SetStateAction<boolean>) => void;
 }
 
+interface INavigation {
+    navigate: (
+        screen: string,
+        params: { screen: string; params: { nameRover: string } },
+    ) => void;
+}
+
 export const ButtonRover: React.FunctionComponent<IProps> = ({
     nameRover,
     source,
     setLoadingImage,
 }) => {
-    const { navigate } = useNavigation<IScreenNavigationProps>();
+    const { navigate } = useNavigation<INavigation>();
 
     const loadImage = () => {
         setLoadingImage(false);
     };
 
+    const handleNavigation = () => {
+        navigate("Botton", {
+            screen: "ImageRover",
+            params: { nameRover },
+        });
+    };
+
     return (
-        <Button
-            activeOpacity={0.8}
-            onPress={() => navigate("ImageRover", nameRover)}
-        >
+        <Button activeOpacity={0.8} onPress={handleNavigation}>
             <RoverName>{nameRover}</RoverName>
             <ImageRover
                 source={source}

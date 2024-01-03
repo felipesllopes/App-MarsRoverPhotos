@@ -6,8 +6,9 @@ import React, { useEffect, useLayoutEffect, useState } from "react";
 import { LoadingScreen } from "../../components/LoadingScreen";
 import { ModalLoading } from "../../components/ModalLoading";
 import { PhotoList } from "../../components/PhotoList";
+import { functionSearchPhotos } from "../../functions/functionSearchPhotos";
+import { functionSearchingData } from "../../functions/functionSearchingData";
 import { IImageData, IRoverData } from "../../interface";
-import { api, key } from "../../services/api";
 import {
     Button,
     CamPicker,
@@ -26,9 +27,13 @@ import {
     Wallpaper,
 } from "./styles";
 
+interface IParams {
+    nameRover: string;
+}
+
 export const ImageRover: React.FunctionComponent = () => {
     const route = useRoute();
-    const name = route.params as String;
+    const { nameRover } = route.params as IParams;
     const navigation = useNavigation();
     const [photoList, setPhotoList] = useState<IImageData[]>([]);
     const [roverData, setRoverData] = useState<IRoverData>({} as IRoverData);
@@ -45,9 +50,9 @@ export const ImageRover: React.FunctionComponent = () => {
 
     useLayoutEffect(() => {
         navigation.setOptions({
-            title: name,
+            title: nameRover,
         });
-    }, [navigation, name]);
+    }, [navigation, nameRover]);
 
     useEffect(() => {
         (async () => {
@@ -59,53 +64,16 @@ export const ImageRover: React.FunctionComponent = () => {
 
     useEffect(() => {
         (async () => {
-            setLoading(true);
-            await api
-                .get(
-                    `mars-photos/api/v1/manifests/${name.toLowerCase()}?api_key=${key}`,
-                )
-                .then(async data => {
-                    setRoverData(await data.data.photo_manifest);
-                })
-                .then(async () => {
-                    await api
-                        .get(
-                            `mars-photos/api/v1/rovers/${name.toLowerCase()}/photos?earth_date=${new Date(
-                                date.getTime() - 1 * dayInMilliseconds,
-                            )
-                                .toISOString()
-                                .slice(0, 10)}&api_key=${key}`,
-                        )
-                        .then(async value => {
-                            let data = [];
-                            data = await value.data.photos;
-
-                            const camList = data
-                                .map(item => item.camera.name)
-                                .filter(
-                                    (value, index, array) =>
-                                        array.indexOf(value) === index,
-                                );
-                            setCamList(camList);
-                            setPhotoList([]);
-                        })
-                        .catch(error => {
-                            alert("Erro ao buscar dados do Rover.");
-                            console.log(error);
-                        });
-                })
-                .catch(error => {
-                    alert("Erro ao buscar datas.");
-                    console.log(error);
-                });
-        })()
-            .catch(error => {
-                alert("Erro.");
-                console.log(error);
-            })
-            .finally(() => {
-                setLoading(false);
-            });
+            await functionSearchingData(
+                setLoading,
+                nameRover,
+                setRoverData,
+                date,
+                dayInMilliseconds,
+                setCamList,
+                setPhotoList,
+            );
+        })();
     }, [date]);
 
     const closeDate = (event: Object, date: Date | undefined) => {
@@ -116,28 +84,14 @@ export const ImageRover: React.FunctionComponent = () => {
     };
 
     const handleSearch = async () => {
-        const rover = name && name.toLowerCase();
+        const rover = nameRover && nameRover.toLowerCase();
         const dat = new Date(date.getTime() - 1 * dayInMilliseconds)
             .toISOString()
             .slice(0, 10);
         const can = cam && cam.toLowerCase();
         setLoading(true);
-        console.log(
-            `mars-photos/api/v1/rovers/${rover}/photos?earth_date=${dat}&camera=${can}&api_key=${key}`,
-        );
-        api.get(
-            `mars-photos/api/v1/rovers/${rover}/photos?earth_date=${dat}&camera=${can}&api_key=${key}`,
-        )
-            .then(async data => {
-                setPhotoList(await data.data.photos);
-            })
-            .catch(error => {
-                alert("Erro ao buscar imagens.");
-                console.log(error);
-            })
-            .finally(() => {
-                setLoading(false);
-            });
+
+        await functionSearchPhotos(rover, dat, can, setPhotoList, setLoading);
     };
 
     return (
