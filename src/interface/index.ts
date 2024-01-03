@@ -20,4 +20,7 @@ export interface IImageData {
     img_src: string;
     earth_date: string;
     sol: number;
+    camera: { full_name: string; name: string };
+    id: number;
+    rover: { name: string; status: string };
 }

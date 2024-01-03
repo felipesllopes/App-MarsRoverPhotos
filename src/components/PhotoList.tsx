@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Dimensions } from "react-native";
 import styled from "styled-components/native";
 import { IImageData } from "../interface";
+import { PhotoDetails } from "./PhotoDetails";
 
 interface IProps {
     item: IImageData;
@@ -11,6 +12,7 @@ export const PhotoList: React.FunctionComponent<IProps> = ({ item }) => {
     const screenWidth = Dimensions.get("window").width;
     const itemWidth = screenWidth / 3.1;
     const [loading, setLoading] = useState(true);
+    const [show, setShow] = useState(false);
 
     const loadImage = () => {
         setLoading(false);
@@ -20,6 +22,7 @@ export const PhotoList: React.FunctionComponent<IProps> = ({ item }) => {
         <Container
             style={{ width: itemWidth, height: itemWidth }}
             activeOpacity={0.9}
+            onPress={() => setShow(true)}
         >
             {loading && <Loading size={"large"} />}
             <Photo
@@ -27,6 +30,8 @@ export const PhotoList: React.FunctionComponent<IProps> = ({ item }) => {
                 source={{ uri: item.img_src }}
                 onLoad={loadImage}
             />
+
+            {<PhotoDetails show={show} item={item} setShow={setShow} />}
         </Container>
     );
 };
