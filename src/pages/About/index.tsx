@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Container, RoverPhoto, Screen, Text, Wallpaper } from "./styles";
 import { useContext } from "react";
-import { AuthContext } from "../../context/idex";
+import { AuthContext } from "../../context";
 import { ModalLoading } from "../../components/ModalLoading";
 
 export const About: React.FunctionComponent = () => {

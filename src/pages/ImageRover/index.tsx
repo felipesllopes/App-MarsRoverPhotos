@@ -6,7 +6,7 @@ import React, { useContext, useEffect, useLayoutEffect, useState } from "react";
 import { LoadingScreen } from "../../components/LoadingScreen";
 import { ModalLoading } from "../../components/ModalLoading";
 import { PhotoList } from "../../components/PhotoList";
-import { AuthContext } from "../../context/idex";
+import { AuthContext } from "../../context";
 import { functionSearchPhotos } from "../../functions/functionSearchPhotos";
 import { functionSearchingData } from "../../functions/functionSearchingData";
 import theme from "../../global/styles/theme";

@@ -1,11 +1,17 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Modal } from "react-native";
 import styled from "styled-components/native";
+import { AuthContext } from "../context";
+import { functionDownload } from "../functions/functionDownload";
+import { functionShared } from "../functions/functionShared";
 import theme from "../global/styles/theme";
 import { IImageData } from "../interface";
-import { functionShared } from "../functions/functionShared";
-import { functionDownload } from "../functions/functionDownload";
+import {
+    addAsyncStorage,
+    favoriteAsyncStorage,
+    rmvAsyncStorage,
+} from "../services/asyncStorage";
 
 interface IProps {
     show: boolean;
@@ -18,6 +24,17 @@ export const PhotoDetails: React.FunctionComponent<IProps> = ({
     setShow,
     item,
 }) => {
+    const [favorite, setFavorite] = useState(false);
+    const { handleUpdate } = useContext(AuthContext);
+
+    useEffect(() => {
+        (async () => {
+            await favoriteAsyncStorage(item).then(val => {
+                setFavorite(val);
+            });
+        })();
+    }, [favorite]);
+
     const handleShared = async () => {
         await functionShared(item.img_src);
     };
@@ -26,10 +43,27 @@ export const PhotoDetails: React.FunctionComponent<IProps> = ({
         await functionDownload(item.img_src, item.rover.name);
     };
 
+    const saveOrDeleteItemAsyncStorage = async () => {
+        if (favorite) {
+            await rmvAsyncStorage(item);
+            setFavorite(false);
+        } else {
+            await addAsyncStorage(item);
+            setFavorite(true);
+        }
+    };
+
+    const closeModal = () => {
+        // quando o modal fecha, essa função do context atualiza
+        // quando estiver na galeria, irá atualizar e remover as imagens
+        handleUpdate();
+        setShow(false);
+    };
+
     return (
         <Modal transparent={true} animationType="fade" visible={show}>
             <ButtonCancel>
-                <IconCancel name="close" onPress={() => setShow(false)} />
+                <IconCancel name="close" onPress={closeModal} />
             </ButtonCancel>
 
             <Screen>
@@ -51,8 +85,12 @@ export const PhotoDetails: React.FunctionComponent<IProps> = ({
                     </ViewText>
 
                     <ViewIcons>
-                        <Button>
-                            <Icon name="bookmark-outline" />
+                        <Button onPress={saveOrDeleteItemAsyncStorage}>
+                            <Icon
+                                name={
+                                    favorite ? "bookmark" : "bookmark-outline"
+                                }
+                            />
                         </Button>
                         <Button onPress={handleDownload}>
                             <Icon name="download" />
