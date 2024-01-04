@@ -9,6 +9,7 @@ export const functionSearchingData = async (
     dayInMilliseconds: number,
     setCamList: (value: React.SetStateAction<any[]>) => void,
     setPhotoList: (value: React.SetStateAction<IImageData[]>) => void,
+    setContextRoverData: (value: React.SetStateAction<IRoverData>) => void,
 ) => {
     setLoading(true);
 
@@ -18,6 +19,7 @@ export const functionSearchingData = async (
         )
         .then(async data => {
             setRoverData(await data.data.photo_manifest);
+            setContextRoverData(await data.data.photo_manifest);
         })
         .then(async () => {
             await api

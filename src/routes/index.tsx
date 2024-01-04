@@ -18,6 +18,9 @@ export const Botton: React.FunctionComponent = () => {
                 headerStyle: { backgroundColor: "#000" },
                 headerTitleAlign: "center",
                 tabBarLabelStyle: { fontSize: 12 },
+                // estilização feita
+                tabBarActiveTintColor: "#000",
+                tabBarInactiveTintColor: "#999",
             }}
         >
             <Botton.Screen

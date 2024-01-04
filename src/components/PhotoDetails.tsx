@@ -80,7 +80,7 @@ const ViewText = styled.View`
 
 const Text = styled.Text`
     font-size: 16px;
-    /* text-align: center; */
+    text-align: center;
 `;
 
 const ViewIcons = styled.View`

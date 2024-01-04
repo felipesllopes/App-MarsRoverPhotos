@@ -21,11 +21,14 @@ import {
     Screen,
     TextButton,
     TextDate,
+    TextEmpty,
     ViewData,
     ViewDate,
     ViewPicker,
     Wallpaper,
 } from "./styles";
+import { useContext } from "react";
+import { AuthContext } from "../../context/idex";
 
 interface IParams {
     nameRover: string;
@@ -43,6 +46,7 @@ export const ImageRover: React.FunctionComponent = () => {
     const [cam, setCam] = useState("");
     const [loading, setLoading] = useState(false);
     const [loadingIcons, setLoadingIcons] = useState(true);
+    const { setContextRoverData } = useContext(AuthContext);
     /**
      * Contagem dos milissegundos. 21h (-3 do fuso horário) * 60m * 60s * 1000mn
      */
@@ -72,6 +76,7 @@ export const ImageRover: React.FunctionComponent = () => {
                 dayInMilliseconds,
                 setCamList,
                 setPhotoList,
+                setContextRoverData,
             );
         })();
     }, [date]);
@@ -165,11 +170,15 @@ export const ImageRover: React.FunctionComponent = () => {
                         </Results>
                     </Header>
 
-                    <ImageFlatList
-                        data={photoList}
-                        renderItem={({ item }) => <PhotoList item={item} />}
-                        numColumns={3}
-                    />
+                    {camList.length == 0 ? (
+                        <TextEmpty>Sem resultados para esta data.</TextEmpty>
+                    ) : (
+                        <ImageFlatList
+                            data={photoList}
+                            renderItem={({ item }) => <PhotoList item={item} />}
+                            numColumns={3}
+                        />
+                    )}
 
                     {loading && <ModalLoading />}
                     {loadingIcons && <LoadingScreen />}

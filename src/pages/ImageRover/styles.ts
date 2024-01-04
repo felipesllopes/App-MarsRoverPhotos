@@ -86,3 +86,10 @@ export const ImageFlatList = styled(
         alignSelf: "center",
     },
 })``;
+
+export const TextEmpty = styled.Text`
+    font-size: 19px;
+    font-style: italic;
+    margin: 30px;
+    text-align: center;
+`;
