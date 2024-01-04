@@ -1,7 +1,8 @@
-import styled from "styled-components/native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Picker } from "@react-native-picker/picker";
 import { FlatList, FlatListProps } from "react-native";
+import styled from "styled-components/native";
+import theme from "../../global/styles/theme";
 import { IImageData } from "../../interface";
 
 export const Container = styled.SafeAreaView`
@@ -19,7 +20,7 @@ export const Screen = styled.View`
 `;
 
 export const Header = styled.View`
-    background-color: #000;
+    background-color: ${theme.colors.black};
     padding: 10px 5px;
 `;
 
@@ -34,7 +35,7 @@ export const ViewDate = styled.TouchableOpacity`
     width: 175px;
     height: 40px;
     border-radius: 10px;
-    background-color: #fff;
+    background-color: ${theme.colors.white};
 `;
 
 export const DateIcon = styled(Ionicons)`
@@ -51,7 +52,7 @@ export const ViewPicker = styled.View`
     height: 40px;
     justify-content: center;
     border-radius: 10px;
-    background-color: #fff;
+    background-color: ${theme.colors.white};
 `;
 
 export const CamPicker = styled(Picker)``;
@@ -63,7 +64,7 @@ export const IconCam = styled(Ionicons)`
 `;
 
 export const Button = styled.TouchableOpacity`
-    background-color: #fff;
+    background-color: ${theme.colors.white};
     margin: 20px 0 5px;
     padding: 5px;
     border-radius: 10px;
@@ -76,7 +77,7 @@ export const TextButton = styled.Text`
 
 export const Results = styled.Text`
     font-size: 17px;
-    color: #fff;
+    color: ${theme.colors.white};
 `;
 
 export const ImageFlatList = styled(

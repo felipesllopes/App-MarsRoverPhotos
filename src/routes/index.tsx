@@ -7,6 +7,7 @@ import { Home } from "../pages/Home";
 import { ImageRover } from "../pages/ImageRover";
 import { Rovers } from "../pages/Rovers";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import theme from "../global/styles/theme";
 
 export const Botton: React.FunctionComponent = () => {
     const Botton = createBottomTabNavigator();
@@ -14,8 +15,8 @@ export const Botton: React.FunctionComponent = () => {
     return (
         <Botton.Navigator
             screenOptions={{
-                headerTintColor: "#fff",
-                headerStyle: { backgroundColor: "#000" },
+                headerTintColor: theme.colors.white,
+                headerStyle: { backgroundColor: theme.colors.black },
                 headerTitleAlign: "center",
                 tabBarLabelStyle: { fontSize: 12 },
                 // estilização feita
@@ -58,8 +59,8 @@ export const Routes: React.FunctionComponent = () => {
         <Stack.Navigator
             screenOptions={{
                 animation: "slide_from_right",
-                headerTintColor: "#fff",
-                headerStyle: { backgroundColor: "#000" },
+                headerTintColor: theme.colors.white,
+                headerStyle: { backgroundColor: theme.colors.black },
             }}
         >
             <Stack.Screen

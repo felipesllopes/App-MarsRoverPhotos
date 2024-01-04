@@ -1,4 +1,5 @@
 import styled from "styled-components/native";
+import theme from "../../global/styles/theme";
 
 export const Container = styled.SafeAreaView`
     flex: 1;
@@ -12,10 +13,10 @@ export const Wallpaper = styled.ImageBackground`
 
 export const Title = styled.Text`
     font-size: 25px;
-    color: white;
+    color: ${theme.colors.white};
     font-weight: bold;
     text-align: center;
-    margin: 20px 10px;
+    margin: 30px 10px 10px;
 `;
 
 export const ViewButton = styled.View`
@@ -33,7 +34,7 @@ export const Button = styled.TouchableOpacity`
 `;
 
 export const TextButton = styled.Text`
-    color: white;
+    color: ${theme.colors.white};
     font-size: 20px;
     padding: 5px 12px;
     text-align: center;

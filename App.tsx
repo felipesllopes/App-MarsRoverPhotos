@@ -3,13 +3,17 @@ import React from "react";
 import { StatusBar } from "react-native";
 import { Routes } from "./src/routes";
 import { AuthProvider } from "./src/context/idex";
+import theme from "./src/global/styles/theme";
+import { ThemeProvider } from "styled-components";
 
 const App: React.FunctionComponent = () => {
     return (
         <AuthProvider>
             <NavigationContainer>
-                <Routes />
-                <StatusBar />
+                <ThemeProvider theme={theme}>
+                    <Routes />
+                    <StatusBar />
+                </ThemeProvider>
             </NavigationContainer>
         </AuthProvider>
     );

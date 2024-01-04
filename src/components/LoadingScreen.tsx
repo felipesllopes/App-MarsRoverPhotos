@@ -1,6 +1,7 @@
 import React from "react";
 import { Modal } from "react-native";
 import styled from "styled-components/native";
+import theme from "../global/styles/theme";
 
 export const LoadingScreen: React.FunctionComponent = () => {
     return (
@@ -17,12 +18,12 @@ export const LoadingScreen: React.FunctionComponent = () => {
 
 const Container = styled.SafeAreaView`
     flex: 1;
-    background-color: #000;
+    background-color: ${theme.colors.black};
     align-items: center;
     justify-content: center;
 `;
 
 const Logo = styled.Image`
-    height: 250px;
-    width: 250px;
+    height: 220px;
+    width: 220px;
 `;

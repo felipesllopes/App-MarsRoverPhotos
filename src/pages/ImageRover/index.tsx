@@ -2,12 +2,14 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { Picker } from "@react-native-picker/picker";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import React, { useContext, useEffect, useLayoutEffect, useState } from "react";
 import { LoadingScreen } from "../../components/LoadingScreen";
 import { ModalLoading } from "../../components/ModalLoading";
 import { PhotoList } from "../../components/PhotoList";
+import { AuthContext } from "../../context/idex";
 import { functionSearchPhotos } from "../../functions/functionSearchPhotos";
 import { functionSearchingData } from "../../functions/functionSearchingData";
+import theme from "../../global/styles/theme";
 import { IImageData, IRoverData } from "../../interface";
 import {
     Button,
@@ -27,8 +29,6 @@ import {
     ViewPicker,
     Wallpaper,
 } from "./styles";
-import { useContext } from "react";
-import { AuthContext } from "../../context/idex";
 
 interface IParams {
     nameRover: string;
@@ -137,7 +137,7 @@ export const ImageRover: React.FunctionComponent = () => {
 
                             <ViewPicker>
                                 <CamPicker
-                                    dropdownIconColor={"#fff"}
+                                    dropdownIconColor={theme.colors.white}
                                     selectedValue={cam}
                                     onValueChange={(item: string, index) =>
                                         setCam(item)
