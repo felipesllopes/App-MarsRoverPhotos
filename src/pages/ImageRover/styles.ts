@@ -89,8 +89,8 @@ export const ImageFlatList = styled(
 })``;
 
 export const TextEmpty = styled.Text`
-    font-size: 19px;
+    font-size: 20px;
     font-style: italic;
-    margin: 30px;
+    margin: 20% 30px;
     text-align: center;
 `;

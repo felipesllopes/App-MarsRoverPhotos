@@ -1,13 +1,12 @@
+import Ionicons from "@expo/vector-icons/Ionicons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import React from "react";
+import theme from "../global/styles/theme";
 import { About } from "../pages/About";
 import { Galery } from "../pages/Galery";
 import { Home } from "../pages/Home";
 import { ImageRover } from "../pages/ImageRover";
-import { Rovers } from "../pages/Rovers";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import theme from "../global/styles/theme";
 
 export const Botton: React.FunctionComponent = () => {
     const Botton = createBottomTabNavigator();
@@ -15,20 +14,17 @@ export const Botton: React.FunctionComponent = () => {
     return (
         <Botton.Navigator
             screenOptions={{
-                headerTintColor: theme.colors.white,
-                headerStyle: { backgroundColor: theme.colors.black },
-                headerTitleAlign: "center",
                 tabBarLabelStyle: { fontSize: 12 },
-                // estilização feita
                 tabBarActiveTintColor: "#000",
                 tabBarInactiveTintColor: "#999",
+                headerShown: false,
             }}
         >
             <Botton.Screen
                 name="ImageRover"
                 component={ImageRover}
                 options={{
-                    title: "Rover",
+                    title: "Fotos",
                     tabBarIcon: ({ color, size }) => (
                         <Ionicons name="camera" color={color} size={30} />
                     ),
@@ -69,18 +65,16 @@ export const Routes: React.FunctionComponent = () => {
                 options={{ headerShown: false }}
             />
 
-            <Stack.Screen name="Rovers" component={Rovers} />
+            <Stack.Screen
+                name="Botton"
+                component={Botton}
+                options={{ title: "Voltar" }}
+            />
 
             <Stack.Screen
                 name="Galery"
                 component={Galery}
                 options={{ title: "Galeria" }}
-            />
-
-            <Stack.Screen
-                name="Botton"
-                component={Botton}
-                options={{ title: "Voltar" }}
             />
         </Stack.Navigator>
     );

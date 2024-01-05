@@ -1,7 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
 import { LoadingScreen } from "../../components/LoadingScreen";
-import { IScreenNavigation } from "../../interface";
 import {
     Button,
     Container,
@@ -11,12 +10,22 @@ import {
     Wallpaper,
 } from "./styles";
 
+interface INavigation {
+    navigate: (screen: string, params?: { screen: string }) => void;
+}
+
 export const Home: React.FunctionComponent = () => {
-    const { navigate } = useNavigation<IScreenNavigation>();
+    const { navigate } = useNavigation<INavigation>();
     const [loading, setLoading] = useState(true);
 
     const loadImage = () => {
         setLoading(false);
+    };
+
+    const handleNavigation = () => {
+        navigate("Botton", {
+            screen: "ImageRover",
+        });
     };
 
     return (
@@ -28,10 +37,7 @@ export const Home: React.FunctionComponent = () => {
                 <Title>Mars Rover Photos</Title>
 
                 <ViewButton>
-                    <Button
-                        onPress={() => navigate("Rovers")}
-                        activeOpacity={0.8}
-                    >
+                    <Button onPress={handleNavigation} activeOpacity={0.8}>
                         <TextButton>Rovers</TextButton>
                     </Button>
 

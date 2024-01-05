@@ -18,9 +18,9 @@ export const Screen = styled.View`
 export const RoverPhoto = styled.Image`
     height: 200px;
     aspect-ratio: 2;
-    margin: 30px;
+    margin: 15% 30px 30px;
 `;
 
 export const Text = styled.Text`
-    font-size: 18px;
+    font-size: 19px;
 `;

@@ -3,7 +3,7 @@ import { api, key } from "../services/api";
 
 export const functionSearchingData = async (
     setLoading: (value: React.SetStateAction<boolean>) => void,
-    nameRover: String,
+    roverName: String,
     setRoverData: (value: React.SetStateAction<IRoverData>) => void,
     date: Date,
     dayInMilliseconds: number,
@@ -15,7 +15,7 @@ export const functionSearchingData = async (
 
     await api
         .get(
-            `mars-photos/api/v1/manifests/${nameRover.toLowerCase()}?api_key=${key}`,
+            `mars-photos/api/v1/manifests/${roverName.toLowerCase()}?api_key=${key}`,
         )
         .then(async data => {
             setRoverData(await data.data.photo_manifest);
@@ -24,7 +24,7 @@ export const functionSearchingData = async (
         .then(async () => {
             await api
                 .get(
-                    `mars-photos/api/v1/rovers/${nameRover.toLowerCase()}/photos?earth_date=${new Date(
+                    `mars-photos/api/v1/rovers/${roverName.toLowerCase()}/photos?earth_date=${new Date(
                         date.getTime() - 1 * dayInMilliseconds,
                     )
                         .toISOString()

@@ -1,19 +1,16 @@
 import Ionicons from "@expo/vector-icons/Ionicons";
 import DateTimePicker from "@react-native-community/datetimepicker";
-import { Picker } from "@react-native-picker/picker";
-import { useNavigation, useRoute } from "@react-navigation/native";
-import React, { useContext, useEffect, useLayoutEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { CustomPicker } from "../../components/CustomPicker";
 import { LoadingScreen } from "../../components/LoadingScreen";
 import { ModalLoading } from "../../components/ModalLoading";
 import { PhotoList } from "../../components/PhotoList";
 import { AuthContext } from "../../context";
 import { functionSearchPhotos } from "../../functions/functionSearchPhotos";
 import { functionSearchingData } from "../../functions/functionSearchingData";
-import theme from "../../global/styles/theme";
 import { IImageData, IRoverData } from "../../interface";
 import {
     Button,
-    CamPicker,
     Container,
     DateIcon,
     Header,
@@ -30,14 +27,7 @@ import {
     Wallpaper,
 } from "./styles";
 
-interface IParams {
-    nameRover: string;
-}
-
 export const ImageRover: React.FunctionComponent = () => {
-    const route = useRoute();
-    const { nameRover } = route.params as IParams;
-    const navigation = useNavigation();
     const [photoList, setPhotoList] = useState<IImageData[]>([]);
     const [roverData, setRoverData] = useState<IRoverData>({} as IRoverData);
     const [date, setDate] = useState(new Date());
@@ -47,16 +37,12 @@ export const ImageRover: React.FunctionComponent = () => {
     const [loading, setLoading] = useState(false);
     const [loadingIcons, setLoadingIcons] = useState(true);
     const { setContextRoverData } = useContext(AuthContext);
+    const roverList = ["Curiosity", "Opportunity", "Spirit"];
+    const [roverName, setRoverName] = useState("Curiosity");
     /**
      * Contagem dos milissegundos. 21h (-3 do fuso horário) * 60m * 60s * 1000mn
      */
     const dayInMilliseconds = 3 * 60 * 60 * 1000;
-
-    useLayoutEffect(() => {
-        navigation.setOptions({
-            title: nameRover,
-        });
-    }, [navigation, nameRover]);
 
     useEffect(() => {
         (async () => {
@@ -70,7 +56,7 @@ export const ImageRover: React.FunctionComponent = () => {
         (async () => {
             await functionSearchingData(
                 setLoading,
-                nameRover,
+                roverName,
                 setRoverData,
                 date,
                 dayInMilliseconds,
@@ -79,7 +65,7 @@ export const ImageRover: React.FunctionComponent = () => {
                 setContextRoverData,
             );
         })();
-    }, [date]);
+    }, [date, roverName]);
 
     const closeDate = (event: Object, date: Date | undefined) => {
         setShow(false);
@@ -89,7 +75,7 @@ export const ImageRover: React.FunctionComponent = () => {
     };
 
     const handleSearch = async () => {
-        const rover = nameRover && nameRover.toLowerCase();
+        const rover = roverName.toLowerCase();
         const dat = new Date(date.getTime() - 1 * dayInMilliseconds)
             .toISOString()
             .slice(0, 10);
@@ -104,6 +90,17 @@ export const ImageRover: React.FunctionComponent = () => {
             <Wallpaper source={require("../../assets/wallpaperImages.png")}>
                 <Screen>
                     <Header>
+                        <ViewPicker
+                            style={{ alignSelf: "center", marginBottom: 20 }}
+                        >
+                            <CustomPicker
+                                getValue={roverName}
+                                setValue={setRoverName}
+                                list={roverList}
+                            />
+                            <IconCam name="options" />
+                        </ViewPicker>
+
                         <ViewData>
                             <ViewDate
                                 onPress={() => setShow(true)}
@@ -136,23 +133,11 @@ export const ImageRover: React.FunctionComponent = () => {
                             )}
 
                             <ViewPicker>
-                                <CamPicker
-                                    dropdownIconColor={theme.colors.white}
-                                    selectedValue={cam}
-                                    onValueChange={(item: string, index) =>
-                                        setCam(item)
-                                    }
-                                >
-                                    {camList.map((v, k) => {
-                                        return (
-                                            <Picker.Item
-                                                key={k}
-                                                value={v}
-                                                label={v}
-                                            />
-                                        );
-                                    })}
-                                </CamPicker>
+                                <CustomPicker
+                                    getValue={cam}
+                                    setValue={setCam}
+                                    list={camList}
+                                />
                                 <IconCam name="camera" />
                             </ViewPicker>
                         </ViewData>
