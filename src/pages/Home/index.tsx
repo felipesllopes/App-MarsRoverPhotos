@@ -1,6 +1,11 @@
+import {
+    Signika_300Light,
+    Signika_700Bold,
+    useFonts,
+} from "@expo-google-fonts/signika";
 import { useNavigation } from "@react-navigation/native";
-import React, { useState } from "react";
-import { LoadingScreen } from "../../components/LoadingScreen";
+import * as SplashScreen from "expo-splash-screen";
+import React, { useEffect, useState } from "react";
 import {
     Button,
     Container,
@@ -16,11 +21,30 @@ interface INavigation {
 
 export const Home: React.FunctionComponent = () => {
     const { navigate } = useNavigation<INavigation>();
-    const [loading, setLoading] = useState(true);
+    const [imageLoaded, setImageLoaded] = useState(false);
+
+    useEffect(() => {
+        SplashScreen.preventAutoHideAsync();
+    }, []);
+
+    const [fontLoaded] = useFonts({
+        Signika_700Bold,
+        Signika_300Light,
+    });
 
     const loadImage = () => {
-        setLoading(false);
+        setImageLoaded(true);
     };
+
+    useEffect(() => {
+        if (fontLoaded && imageLoaded) {
+            SplashScreen.hideAsync();
+        }
+    }, [fontLoaded, imageLoaded]);
+
+    if (!fontLoaded) {
+        return null;
+    }
 
     const handleNavigation = () => {
         navigate("Botton", {
@@ -34,22 +58,27 @@ export const Home: React.FunctionComponent = () => {
                 source={require("../../assets/wallpaperHome.jpg")}
                 onLoad={loadImage}
             >
-                <Title>Mars Rover Photos</Title>
+                <Title style={{ fontFamily: "Signika_700Bold" }}>
+                    Mars Rover Photos
+                </Title>
 
                 <ViewButton>
                     <Button onPress={handleNavigation} activeOpacity={0.8}>
-                        <TextButton>Rovers</TextButton>
+                        <TextButton style={{ fontFamily: "Signika_300Light" }}>
+                            Pesquisar Rovers
+                        </TextButton>
                     </Button>
 
                     <Button
                         onPress={() => navigate("Galery")}
                         activeOpacity={0.8}
                     >
-                        <TextButton>Galeria</TextButton>
+                        <TextButton style={{ fontFamily: "Signika_300Light" }}>
+                            Itens salvos
+                        </TextButton>
                     </Button>
                 </ViewButton>
             </Wallpaper>
-            {loading && <LoadingScreen />}
         </Container>
     );
 };

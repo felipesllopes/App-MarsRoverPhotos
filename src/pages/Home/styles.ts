@@ -9,18 +9,19 @@ export const Wallpaper = styled.ImageBackground`
     flex: 1;
     width: 100%;
     align-items: center;
+    justify-content: center;
 `;
 
 export const Title = styled.Text`
-    font-size: 25px;
+    font-size: 30px;
     color: ${theme.colors.white};
-    font-weight: bold;
     text-align: center;
-    margin: 30px 10px 10px;
+    margin: 10% 20px;
+    position: absolute;
+    top: 0;
 `;
 
 export const ViewButton = styled.View`
-    margin-top: 50%;
     width: 60%;
     align-items: center;
 `;

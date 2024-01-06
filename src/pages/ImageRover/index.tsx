@@ -1,8 +1,6 @@
-import Ionicons from "@expo/vector-icons/Ionicons";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import React, { useContext, useEffect, useState } from "react";
 import { CustomPicker } from "../../components/CustomPicker";
-import { LoadingScreen } from "../../components/LoadingScreen";
 import { ModalLoading } from "../../components/ModalLoading";
 import { PhotoList } from "../../components/PhotoList";
 import { AuthContext } from "../../context";
@@ -46,14 +44,6 @@ export const ImageRover: React.FunctionComponent = () => {
 
     useEffect(() => {
         (async () => {
-            await Ionicons.loadFont().then(() => {
-                setLoadingIcons(false);
-            });
-        })();
-    }, []);
-
-    useEffect(() => {
-        (async () => {
             await functionSearchingData(
                 setLoading,
                 roverName,
@@ -75,14 +65,14 @@ export const ImageRover: React.FunctionComponent = () => {
     };
 
     const handleSearch = async () => {
-        const rover = roverName.toLowerCase();
-        const dat = new Date(date.getTime() - 1 * dayInMilliseconds)
-            .toISOString()
-            .slice(0, 10);
-        const can = cam && cam.toLowerCase();
-        setLoading(true);
-
-        await functionSearchPhotos(rover, dat, can, setPhotoList, setLoading);
+        await functionSearchPhotos(
+            setPhotoList,
+            setLoading,
+            roverName,
+            date,
+            dayInMilliseconds,
+            cam,
+        );
     };
 
     return (
@@ -166,7 +156,6 @@ export const ImageRover: React.FunctionComponent = () => {
                     )}
 
                     {loading && <ModalLoading />}
-                    {loadingIcons && <LoadingScreen />}
                 </Screen>
             </Wallpaper>
         </Container>

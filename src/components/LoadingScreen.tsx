@@ -24,6 +24,6 @@ const Container = styled.SafeAreaView`
 `;
 
 const Logo = styled.Image`
-    height: 220px;
-    width: 220px;
+    height: 200px;
+    width: 200px;
 `;

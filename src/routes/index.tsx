@@ -74,7 +74,7 @@ export const Routes: React.FunctionComponent = () => {
             <Stack.Screen
                 name="Galery"
                 component={Galery}
-                options={{ title: "Galeria" }}
+                options={{ title: "Itens salvos" }}
             />
         </Stack.Navigator>
     );
