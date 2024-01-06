@@ -8,7 +8,7 @@
 - [Description](#description)
 - [Image Screens](#image-screens)
 - [Language and Technologies used](#language-technologies)
-- [Libraries](#libraries)
+- [Libraries used](#libraries)
 - [Download](#download)
 
 <br/>
@@ -80,8 +80,9 @@ ________________________________________________________________________________
 
 ![tela12](https://github.com/felipesllopes/App-MarsRoverPhotos/assets/99768939/a77cdb6b-15f7-4e44-8bd4-a00246f656c7)
 
+<br/>
 
-#### 
+> #### OBS: Updated date format to: DD/MM/YYYY 
 
 <br/>
 
@@ -100,6 +101,61 @@ ________________________________________________________________________________
 _______________________________________________________________________________________________________________________________________________________________________________________
 
 ### Libraries used <a name="libraries"></a>
+
+<table>
+    <tr>
+        <td>Library</td>
+        <td>Version</td>
+    </tr>
+    <tr>
+        <td>expo-google-fonts/signika</td>
+        <td>0.2.3</td>
+    </tr>
+    <tr>
+        <td>react-native-async-storage/async-storage</td>
+        <td>1.18.2</td>
+    </tr>
+    <tr>
+        <td>react-native-community/datetimepicker</td>
+        <td>7.6.2</td>
+    </tr>
+    <tr>
+        <td>react-native-picker/picker</td>
+        <td>2.4.10</td>
+    </tr>
+    <tr>
+        <td>react-navigation/bottom-tabs</td>
+        <td>6.5.11</td>
+    </tr>
+    <tr>
+        <td>react-navigation/native-stack</td>
+        <td>6.9.17</td>
+    </tr>
+    <tr>
+        <td>expo-file-system</td>
+        <td>15.4.5</td>
+    </tr>
+    <tr>
+        <td>expo-font</td>
+        <td>11.4.0</td>
+    </tr>
+    <tr>
+        <td>expo-media-library</td>
+        <td>15.4.1</td>
+    </tr>
+    <tr>
+        <td>expo-notifications</td>
+        <td>0.20.1</td>
+    </tr>
+    <tr>
+        <td>expo-sharing</td>
+        <td>11.5.0</td>
+    </tr>
+    <tr>
+        <td>styled-components</td>
+        <td>6.1.6</td>
+    </tr>
+</table>
 
 <br/>
 
