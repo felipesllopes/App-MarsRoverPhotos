@@ -55,7 +55,7 @@ export const PhotoDetails: React.FunctionComponent<IProps> = ({
 
     const closeModal = () => {
         // quando o modal fecha, essa função do context atualiza
-        // quando estiver na galeria, irá atualizar e remover as imagens
+        // se estiver na tela de salvos, o array de dependencia irá atualizar
         handleUpdate();
         setShow(false);
     };
@@ -79,7 +79,10 @@ export const PhotoDetails: React.FunctionComponent<IProps> = ({
                             Câmera: {item?.camera?.full_name} (
                             {item?.camera?.name})
                         </Text>
-                        <Text>Data Terrestre: {item?.earth_date}</Text>
+                        <Text>
+                            Data Terrestre:{" "}
+                            {new Date(item?.earth_date).toLocaleDateString()}
+                        </Text>
                         <Text>Sol Marciano: {item?.sol}</Text>
                         <Text>Id: {item?.id}</Text>
                     </ViewText>

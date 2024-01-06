@@ -1,8 +1,7 @@
-import React, { useState } from "react";
-import { Container, RoverPhoto, Screen, Text, Wallpaper } from "./styles";
-import { useContext } from "react";
-import { AuthContext } from "../../context";
+import React, { useContext, useState } from "react";
 import { ModalLoading } from "../../components/ModalLoading";
+import { AuthContext } from "../../context";
+import { Container, RoverPhoto, Screen, Text, Wallpaper } from "./styles";
 
 export const About: React.FunctionComponent = () => {
     const { contextRoverData } = useContext(AuthContext);
@@ -26,9 +25,24 @@ export const About: React.FunctionComponent = () => {
                         resizeMode="contain"
                     />
                     <Text>Rover: {contextRoverData.name}</Text>
-                    <Text>Lançamento: {contextRoverData.launch_date}</Text>
-                    <Text>Pouso: {contextRoverData.landing_date}</Text>
-                    <Text>Últimos dados: {contextRoverData.max_date}</Text>
+                    <Text>
+                        Lançamento:{" "}
+                        {new Date(
+                            contextRoverData.launch_date,
+                        ).toLocaleDateString()}
+                    </Text>
+                    <Text>
+                        Pouso:{" "}
+                        {new Date(
+                            contextRoverData.landing_date,
+                        ).toLocaleDateString()}
+                    </Text>
+                    <Text>
+                        Últimos dados:{" "}
+                        {new Date(
+                            contextRoverData.max_date,
+                        ).toLocaleDateString()}
+                    </Text>
                     <Text>
                         Total de fotos:{" "}
                         {contextRoverData.total_photos.toLocaleString("pt-BR")}
