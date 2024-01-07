@@ -7,6 +7,7 @@
 - [Logo](#logo)
 - [Description](#description)
 - [Image Screens](#image-screens)
+- [API](#api)
 - [Language and Technologies used](#language-technologies)
 - [Libraries used](#libraries)
 - [Download](#download)
@@ -83,6 +84,14 @@ ________________________________________________________________________________
 <br/>
 
 > #### OBS: Updated date format to: DD/MM/YYYY 
+
+<br/>
+
+_______________________________________________________________________________________________________________________________________________________________________________________
+
+### API: <a name="api"></a>
+
+[NASA Open APIs](https://api.nasa.gov/) (Mars Rover Photos)
 
 <br/>
 
