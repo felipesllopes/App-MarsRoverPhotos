@@ -65,7 +65,7 @@ export const Home: React.FunctionComponent = () => {
                 <ViewButton>
                     <Button onPress={handleNavigation} activeOpacity={0.8}>
                         <TextButton style={{ fontFamily: "Signika_300Light" }}>
-                            Pesquisar Rovers
+                            Rovers
                         </TextButton>
                     </Button>
 
@@ -74,7 +74,7 @@ export const Home: React.FunctionComponent = () => {
                         activeOpacity={0.8}
                     >
                         <TextButton style={{ fontFamily: "Signika_300Light" }}>
-                            Itens salvos
+                            Galeria
                         </TextButton>
                     </Button>
                 </ViewButton>

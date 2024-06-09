@@ -28,7 +28,7 @@ export const ViewButton = styled.View`
 
 export const Button = styled.TouchableOpacity`
     border-radius: 6px;
-    background-color: rgba(80, 80, 80, 0.7);
+    background-color: #505050;
     width: 100%;
     margin: 10px;
     border-width: 1px;

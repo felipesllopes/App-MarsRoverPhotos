@@ -91,6 +91,6 @@ export const ImageFlatList = styled(
 export const TextEmpty = styled.Text`
     font-size: 20px;
     font-style: italic;
-    margin: 20% 30px;
+    margin: 40% 30px;
     text-align: center;
 `;
